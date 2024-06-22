@@ -1,7 +1,7 @@
 // Expressões vs Declarações
 
 // Expressões
-// São pedaços pquenos de código que produzem valor
+// São pquenos pedaços de código que produzem valor
 
 3 + 4;
 1991;
