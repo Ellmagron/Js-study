@@ -1,0 +1,105 @@
+The JavaScript Engine and Runtime
+
+O que é Engine do Java Script ?
+	Basicamente, um mecanismo (engine) é um programa muito complexo onde o JavaScript é executado. O JavaScript, por ser uma tecnologia primariamente front-end, rodando do lado do cliente, necessita de um mecanismo (engine) do navegador para ser executado, como é o caso do Google Chrome, que possui sua própria engine chamada V8.
+
+Componente de uma engine
+
+Todo motor de JavaScript contém:
+
+Call Stack: É onde o código é executado usando o "contexto de execução", contexto de execução é o escopo onde o código é acessível dentro do programa.
+
+Heap: É uma "Piscina" de memória não estruturada, onde são armazenados todos os objetos necessários para uma aplicação
+
+Compilação vs. Interpretação
+Compilação: Nesse processo, todo o código-fonte é traduzido para código de máquina (ou código binário) de uma vez, gerando um arquivo executável. Esse arquivo pode ser executado diretamente pelo sistema operacional, sem necessidade do código-fonte ou de um interpretador adicional. 
+
+Interpretação: Neste caso, o código-fonte é interpretado linha por linha durante a execução. Um interpretador lê o código, analisa e executa cada instrução na ordem em que aparece. Linguagens como Python e Ruby são interpretadas. Esse processo tende a ser mais lento, pois envolve a análise do código-fonte em tempo de execução, mas permite uma maior flexibilidade e facilidade de depuração.
+
+Just-in-Time (JIT) Compilation
+JavaScript utiliza uma combinação de compilação e interpretação através de uma técnica chamada Just-in-Time (JIT) Compilation. No JIT, o código JavaScript é compilado para código de máquina em tempo de execução, ou seja, "just in time" para ser executado. Isso é feito para melhorar a performance, já que o código é traduzido diretamente para uma forma que o processador pode executar.
+
+O JIT permite que partes do código sejam otimizadas com base em como estão sendo executadas, melhorando a eficiência. Um ponto importante é que, ao contrário da compilação tradicional, o JIT não gera um arquivo binário portável separado. Em vez disso, o código é traduzido e executado no momento da execução, o que significa que o processo de tradução e execução está entrelaçado.
+
+Engines de JavaScript modernas, como o V8 (do Google Chrome) e o SpiderMonkey (do Firefox), utilizam JIT para otimizar a execução do código JavaScript, alcançando uma performance próxima da execução nativa de código compilado, enquanto mantém a flexibilidade da interpretação.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COMPILAÇÃO JUST-IN-TIME DE JS:
+Análise (Parse): O código é lido (analisado) durante esse processo, e uma estrutura de dados chamada AST (Árvore de Sintaxe Abstrata) é criada, que representa a formatação do código como ele será interpretado dentro da engine do navegador. É nesse momento que erros no código são verificados. Então, esse código AST é utilizado para gerar o código de máquina.
+
+**A AST não tem nada a ver com a árvore DOM.
+
+Compilação (Compilation): Nesse momento, o código AST é transformado em código de máquina.
+
+Execução (Execution): Acontece dentro da pilha de chamadas (call stack).
+
+Otimização (Optimization): Enquanto o código está sendo executado, ele é recompilado novamente para melhorar o desempenho, e essa etapa acontece em uma thread especial que não é acessível através do código.
+
+RUNTIME DO NAVEGADOR:
+É um grande contêiner que inclui tudo o que é necessário para utilizar JavaScript no navegador.
+
+APIs da Web (Web APIs): São funcionalidades fornecidas pela engine, acessíveis através do objeto window.
+
+O Node.js é a maneira de executar o JavaScript fora do navegador.
+
+O que é o Contexto de Execução?
+É um ambiente em que um pedaço de JavaScript é executado. Ele armazena todas as informações necessárias para que algum código seja executado.
+
+Contexto de Execução Global:
+É um contexto padrão, criado por código que não está dentro de nenhuma função.
+
+Contexto de Execução de Função:
+Para cada chamada de função, um contexto de execução é criado e colocado na pilha de chamadas.
+
+O que está dentro de um Contexto de Execução?
+1. Ambiente de Variáveis: declarações let, const e var
+2. Funções
+3. Argumentos de objetos (exceto em funções arrow)
+4. Cadeia de Escopo (Scope Chain)
+5. Palavra-chave this (exceto em funções arrow)
+
+
+
+SCOPING AND SCOPE IN JAVASCRIPT: CONCEPTS
+
+Scoping: É como as variáveis do programa são organizada e acessadas. "Onde as variáveis vivem" ou "Onde posso acessar determinada variável e onde não"
+
+Lexical Scoping: Scoping é controlado pelo local onde a função e blocos são definidos no código,  isso quer dizer que um scopo só é possível acessar outro scopo acima dele, nunca abaixo ou ao lado.
+
+Scope: É o espaço ou ambiente em que determinada variável é declarada(Variável de ambiente  no caso de funções). Existe 3 tipos de escopo, global, function e block scope
+
+Scope of variable: Região de nosso código onde uma determinada variavel pode ser acessada 
+
+
+****OS 3 tipos de escopo
+
+
+Global: Variavel que está fora de qualquer função ou bloco(declarações que são delimitadas por {}).
+	Variavek declrada no escopo global são acessaveis em qualquer lugar de nosso código.
+
+
+Function: Variavel que  foi declarada dentro de uma função e somente é acessivel dentro dessa função(Termo geral: Escopo local).
+Block: Variáveis que somente são acessíveis dentro de declaração delimitadas por {} ex: if ou for, isso surgiu  no es6, então somente se aplica as declarações const e let. declaração var não tem escopo de bloco  e sim escopo de função. Funções também tem esopo e bloco mas somente quando o mode 'strict' está ativado.
+
+
+The Scope chain:
+	É maneira como um scopo pode acessar outro escopo, ex: função acessando um variável global, ou uma função aninhada acessando variável da função função pai. Isso acontece apenas de dentro para fora, então nunca escopo externo consegue acessar um escopo interno, apenas um escopo filho pode acessar o escopo pai.
+
+
+
+Scope chain vs call stack:
+
+Call stack: Organiza os scopos na ordem que são executado no código
+Scope chain: É a ordem em que funções são escritas no código.
