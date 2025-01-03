@@ -1,4 +1,5 @@
 'use strict';
+<<<<<<< HEAD
 'use strict';
 
 ///////////////////////////////////////
@@ -9,10 +10,17 @@ function calcAge(birthYear) {
 
   function printAge() {
     let output = `${firstName}, you are ${age}, born in ${birthYear}`;
+=======
+
+function calcAge(birthYear) {
+  function printAge() {
+    const output = `${firstName}, you are ${age}, bor in ${birthYear}`;
+>>>>>>> e9e48414453ed96d374547457a5976a328fd32fe
     console.log(output);
 
     if (birthYear >= 1981 && birthYear <= 1996) {
       var millenial = true;
+<<<<<<< HEAD
       // Creating NEW variable with same name as outer scope's variable
       const firstName = 'Steven';
 
@@ -20,16 +28,33 @@ function calcAge(birthYear) {
       output = 'NEW OUTPUT!';
 
       const str = `Oh, and you're a millenial, ${firstName}`;
+=======
+
+      // Create NEW variable witg sane bane as outer scope's variable
+
+      const firstName = 'Pedro';
+
+      //Reassigning outer scope's variable
+      output = 'NEW OUTPUT';
+
+      const str = `You're a millenial, ${firstName}`;
+>>>>>>> e9e48414453ed96d374547457a5976a328fd32fe
       console.log(str);
 
       function add(a, b) {
         return a + b;
       }
     }
+<<<<<<< HEAD
     // console.log(str);
     console.log(millenial);
     // console.log(add(2, 3));
     console.log(output);
+=======
+
+    console.log(millenial);
+    add(2, 3);
+>>>>>>> e9e48414453ed96d374547457a5976a328fd32fe
   }
   printAge();
 
@@ -38,6 +63,7 @@ function calcAge(birthYear) {
 
 const firstName = 'Jonas';
 calcAge(1991);
+<<<<<<< HEAD
 // console.log(age);
 // printAge();
 
@@ -86,3 +112,5 @@ const z = 3;
 console.log(x === window.x);
 console.log(y === window.y);
 console.log(z === window.z);
+=======
+>>>>>>> e9e48414453ed96d374547457a5976a328fd32fe
