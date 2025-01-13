@@ -33,6 +33,6 @@ console.log(jonas);
 /*
     Na programação existe 2 termos quando se trabalha com parametros em função, que é passagem por valor e passgem por referencia. 
         
-    No java script não existe pasasgem por referencia e sim por valor
+    No java script não existe pasasgem por referencia e apenas  por valor
 
  */
