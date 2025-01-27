@@ -33,7 +33,16 @@ const account4 = {
   pin: 4444,
 };
 
-const accounts = [account1, account2, account3, account4];
+const account5 = {
+  owner: 'Pedro Araujo',
+  movements: [
+    300, 230, 830, 1200, 90, 200, -200, 340, -300, -20, 50, 400, -460,
+  ],
+  interestRate: 1,
+  pin: 5555,
+};
+
+const accounts = [account1, account2, account3, account4, account5];
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -151,7 +160,16 @@ const createUsernames = function (acc) {
       .join('');
   });
 };
+createUsernames(accounts);
 
+const updateUI = function (acc) {
+  //Display movements
+  displayMovements(acc.movements);
+  //Display balance
+  calcDisplayBalance(acc);
+  //Display summary
+  calcDisplaySummary(acc);
+};
 /*Feature: login de usuario*/
 //Event Handler
 let currentAccount;
@@ -181,17 +199,14 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginPin.blur();
 
     containerApp.style.opacity = 1;
-    //Display movements
-    displayMovements(currentAccount.movements);
-    //Display balance
-    calcDisplayBalance(currentAccount);
-    //Display summary
-    calcDisplaySummary(currentAccount);
+
+    //update UI
+
+    updateUI(currentAccount);
   }
 });
 
 /*Feature Tranfêrencia de dinheiro para outro usuário */
-
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = Number(inputTransferAmount.value);
@@ -199,16 +214,64 @@ btnTransfer.addEventListener('click', function (e) {
     acc => acc.username === inputTransferTo.value
   );
 
+  //Limpando campos
+  inputTransferAmount.value = inputTransferTo.value = '';
+
   if (
     amount > 0 &&
     receiveAcc &&
     currentAccount.balance >= amount &&
     receiveAcc?.username !== currentAccount.username
   ) {
-    console.log('Transfer valid');
+    //Realizando Transferencia de dinheiro
+    currentAccount.movements.push(-amount);
+    receiveAcc.movements.push(amount);
+
+    //Update UI
+    updateUI(currentAccount);
   }
   console.log(amount, receiveAcc);
 });
 
-createUsernames(accounts);
+/*Feature: Pedir emprestimo
+  Emprestimo só é garantidom, se houver um deposito de pelo menos 10% do valor requisitado do emprestimo.
+*/
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const loan = Number(inputLoanAmount.value);
+  if (loan > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    currentAccount.movements.push(loan);
+    //UpdateUi
+    updateUI(currentAccount);
+
+    inputLoanAmount.value = '';
+  }
+});
+
+/*Feature: Deletando conta de usuário */
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    /*
+    findIndex é semelehante ao indexOf, mas possui grande vantagem, que é a possibilidade de implementar um lógia mais complexa, já que popr sua vez, possui  função callback além de apenas passar um valor como parametro, como é o caso do findIndex
+    */
+    // index.indexOf();
+
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+
+    /*Utilizando o método splice para deletar o objeto, porque o splice é um método que consegue mutar o array  original */
+    accounts.splice(index, 1);
+
+    //Hide UI
+    containerApp.style.opacity = 0;
+  }
+  inputCloseUsername.value = inputClosePin.value = '';
+});
+
 console.log(accounts);
