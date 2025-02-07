@@ -9,7 +9,7 @@ YOUR TASKS:
 
 
 
-7. Are there any breeds that are "active"? "Active" means that the dog has 3 or more activities. Log to the console whether "true" or "false".
+
 
 BONUS: What's the average weight of the heaviest breed that likes to fetch? HINT: Use the "Math.max" method along with the ... operator.
 
@@ -75,10 +75,27 @@ console.log(uniqueActivities);
 
 //5. Many dog breeds like to swim. What other activities do these dogs like? Store all the OTHER activities these breeds like to do, in a unique array called "swimmingAdjacent".
 
-const swimmingAdjacent = breeds.map(brd =>
-  brd.activities.find(brd => brd === 'swimming')
-);
+const swimmingAdjacent = [
+  ...new Set(
+    breeds
+      .filter(breed => breed.activities.includes('swimming'))
+      .flatMap(breed => breed.activities)
+      .filter(activity => activity !== 'swimming')
+  ),
+];
 
 console.log(swimmingAdjacent);
 
 //6. Do all the breeds have an average weight of 10kg or more? Log to the console whether "true" or "false".
+console.log(breeds.every(breed => breed.averageWeight > 10));
+
+//7. Are there any breeds that are "active"? "Active" means that the dog has 3 or more activities. Log to the console whether "true" or "false".
+
+console.log(breeds.some(breed => breed.activities.length >= 3));
+
+// Bonus
+
+const fetchWeights = breeds
+  .filter(breed.activities.includes('fetch'))
+  .map(breed => breed.averageWeight);
+const heaviestFetchBreed = Math.max(...fetchWeights); //Math.max, não aceita um array, e sim múltiplos elementops.
