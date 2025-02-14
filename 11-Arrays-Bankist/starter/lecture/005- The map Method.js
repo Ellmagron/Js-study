@@ -34,4 +34,5 @@ const movementsDescription = movements.map(
       mov
     )}`
 );
+
 console.log(movementsDescription);
